@@ -30,6 +30,17 @@ services:
       #volumes:
       #   - "$PWD"/etc:/opt/restheart/etc:ro
 
+   mongo-express:
+      image: mongo-express:0.31
+      links:
+         - mongodb:mongo
+      networks:
+         - backend
+      ### As the mongo container starts unauthenticated, for security reasons comment out the below ports
+      ### so that mongodb can be accessed from restheart only
+      ports:
+         - "8081:8081"
+
    mongodb:
       image: mongo:3.2
       ### Uncomment to name the container explicitly
